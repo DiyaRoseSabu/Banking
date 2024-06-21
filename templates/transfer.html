@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Transactions</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Transactions for Customer ID {{ transactions[0].sender_id if transactions else 'N/A' }}</h1>
+    <table>
+        <tr>
+            <th>Transaction ID</th>
+            <th>Sender ID</th>
+            <th>Receiver ID</th>
+            <th>Transaction Amount</th>
+        </tr>
+        {% for transaction in transactions %}
+        <tr>
+            <td>{{ transaction.transaction_id }}</td>
+            <td>{{ transaction.sender_id }}</td>
+            <td>{{ transaction.receiver_id }}</td>
+            <td>{{ transaction.transaction_amount }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

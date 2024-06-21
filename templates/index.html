@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll Down Home Page</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 200vh; /* Two sections, so 200% of viewport height */
+        }
+
+        .section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            scroll-snap-align: start;
+            position: relative; /* Required for absolute positioning */
+        }
+
+        #section1 {
+            background-color: rgba(77, 85, 192, 0.548); /* 90% transparent background */
+            flex-direction: row;
+            background-image: url("homeimg.jpg"); /* Image background */
+            background-size: cover; /* Cover the entire section */
+            background-position: center; /* Center the background image */
+            padding: 20px;
+        }
+
+        #section1 .about-us {
+            position: absolute;
+            top: 50%; /* Center vertically */
+            left: 50%; /* Center horizontally */
+            transform: translate(-50%, -50%); /* Center the about-us div */
+            color: #ffffff;
+            text-align: center;
+            max-width: 80%;
+            font-size: 30px; /* Font size */
+            font-style: unset; /* Font style */
+            font-weight: bold; /* Bold text */
+            text-shadow: 2px 2px 5px #000000; /* Text shadow for highlight effect */
+        }
+
+        .about-us-text {
+            text-align: right;
+        }
+
+        #section2 {
+            background-color: #C3E3EB; /* Background color for the second section */
+            flex-direction: column;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            gap: 20px; /* Add some spacing between buttons */
+        }
+
+        .scroll-button {
+            padding: 20px; /* Square button */
+            width: 200px; /* Square button */
+            height: 200px; /* Square button */
+            background-size: cover; /* Cover the entire button */
+            background-position: center; /* Center the background image */
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+            color: transparent; /* Transparent text initially */
+            font-size: 16px; /* Font size for button text */
+            text-align: center; /* Center text */
+            line-height: 160px; /* Center text vertically */
+            position: relative; /* Position relative for pseudo-elements */
+            overflow: hidden; /* Hide overflowing content */
+        }
+
+        .scroll-button:before {
+            content: ''; /* Empty content for pseudo-element */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            z-index: 1; /* Above button text */
+            opacity: 0; /* Initially hidden */
+            transition: opacity 0.3s ease; /* Fade-in transition */
+        }
+
+        .scroll-button:hover:before {
+            opacity: 1; /* Fully visible on hover */
+        }
+
+        .scroll-button button {
+            position: relative;
+            z-index: 2; /* Above pseudo-element */
+            color: #000000; /* White text color */
+        }
+
+        .scroll-button:first-child {
+            background-color: #36454F; /* Dark color for the first button */
+        }
+
+        .scroll-button:nth-child(2) {
+            background-color: #061E45; /* Darker color for the second button */
+        }
+
+        .scroll-button:hover {
+            transform: scale(1.1); /* Increase size on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="section" id="section1">
+            <div class="about-us">
+                <div class="about-us-text">
+                    <h1 style="font-size: 32px; font-style: italic;">About Us</h1> <!-- Adjusted font size and style -->
+                    <p>Welcome to our website. We are dedicated to providing the best service.</p>
+                </div>
+            </div>
+        </div>
+        <div class="section" id="section2">
+            <div class="button-container">
+                <a class="scroll-button" href="{{ url_for('customer_list') }}">
+                    <button>Customers</button>
+                </a>
+                <a class="scroll-button" href="{{ url_for('transactions') }}">
+                    <button>Transactions</button>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
